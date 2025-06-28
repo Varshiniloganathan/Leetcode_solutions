@@ -1,6 +1,6 @@
 class Solution {
     public boolean isSubsequence(String s, String t) {
-        char[] arr = s.toCharArray();
+       /* char[] arr = s.toCharArray();
         char[] arr1 = t.toCharArray();
         if(arr1.length<arr.length) return false;
         if(arr.length==0 || (arr.length==0 && arr1.length==0)) return true;
@@ -23,7 +23,15 @@ class Solution {
                 return false;
             }
         }
-        return true;
+        return true;*/
+        int i=0,j=0;
+        while(i<s.length()&&j<t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+            }
+            j++;
+        }
+        return i==s.length();
         
     }
 }
