@@ -1,21 +1,24 @@
 class Solution {
     public void nextPermutation(int[] nums) {
         int n = nums.length;
-        int i = n-2;
-        while(i>=0 && nums[i]>=nums[i+1]){
-            i--;
-        }
-        if(i>=0){
-            int j = n-1;
-            while(nums[j]<=nums[i]){
-                j--;
+        int bp = -1;
+        for(int i=n-1;i>0;i--){
+            if(nums[i-1]<nums[i]){
+                bp = i-1;
+                break;
             }
-            int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
         }
-        
-        int l=i+1;
+        if (bp != -1) {
+            for (int i = n - 1; i > bp; i--) {
+                if (nums[i] > nums[bp]) {
+                    int temp = nums[i];
+                    nums[i] = nums[bp];
+                    nums[bp] = temp;
+                    break;
+                }
+            }
+        }
+        int l=bp+1;
         int r = n-1;
         while(l<r){
             int temp = nums[l];
