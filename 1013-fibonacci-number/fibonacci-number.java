@@ -1,18 +1,17 @@
 class Solution {
+    public int fn(int i,int[] dp){
+        if(i == 0 || i==1) return i;
+        if(dp[i]!=-1){
+            return dp[i];
+        } 
+        return dp[i] = fn(i-1,dp) + fn(i-2,dp);
+    }
     public int fib(int n) {
-        /*if(n<=1) return n;
-        int temp1=0;
-        int temp2=1;
-        while(n>1){
-            int ans = temp1+temp2;
-            temp1 = temp2;
-            temp2=ans;
-            n--;
-
-        }
-        return temp2;*/
-        if(n<=1) return n;
-        return fib(n-1) + fib(n-2);
+        int[] dp = new int[n+1];
+        Arrays.fill(dp,-1);
+        int ans = fn(n,dp);
+        return ans;
+        
          
     }
 }
