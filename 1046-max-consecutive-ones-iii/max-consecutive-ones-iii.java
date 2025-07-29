@@ -10,15 +10,17 @@ class Solution {
                 zc++;
             }
             
-            while(zc>k){
+            if(zc>k){
                 if(nums[l]==0) zc--;
                 l++;
+                //r++;
                 
             }
             if(zc<=k){
                maxlen = Math.max(maxlen,r-l+1);
-               r++;
+               //r++;
             }
+            r++;
 
             
         }
