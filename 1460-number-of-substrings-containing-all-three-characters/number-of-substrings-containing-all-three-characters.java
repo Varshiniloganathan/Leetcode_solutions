@@ -1,6 +1,6 @@
 class Solution {
     public int numberOfSubstrings(String s) {
-        int n = s.length();
+        /*int n = s.length();
         int l=0;
         int r = 0;
         int cnt=0;
@@ -16,6 +16,19 @@ class Solution {
                 l++;
             }
             r++;
+        }
+        return cnt;*/
+        int[] arr = new int[3];
+        Arrays.fill(arr,-1);
+        int cnt=0;
+        for(int r=0;r<s.length();r++){
+            arr[s.charAt(r)-'a'] = r;
+            if(arr[0]!=-1 && arr[1]!=-1 && arr[2]!=-1){
+                int min = Math.min(arr[0],Math.min(arr[1],arr[2]));
+                cnt = cnt + min + 1;
+
+            }
+
         }
         return cnt;
     }
