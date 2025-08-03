@@ -23,7 +23,7 @@ class Solution {
                         //while(k<l && nums[l]==nums[l-1]) l--; 
 
                         k++;
-                        l--;
+                        //l--;
 
                     }
                     else if(sum>target){
