@@ -4,7 +4,7 @@ class Solution {
         int mindiff = Integer.MAX_VALUE;
         int cs = 0;
         Arrays.sort(nums);
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n-2;i++){
             int j=i+1;
             int k=n-1;
             while(j<k){
