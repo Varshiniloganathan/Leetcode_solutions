@@ -13,7 +13,7 @@ class Solution {
                 if(sum==target){
                     return sum;
                 }
-                if(sum>target){
+                else if(sum>target){
                     k--;
                 }
                 else{
