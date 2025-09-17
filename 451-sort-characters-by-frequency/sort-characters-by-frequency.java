@@ -1,25 +1,30 @@
 class Solution {
     public String frequencySort(String s) {
-        int n = s.length();
-        Map<Character,Integer> map = new HashMap<>();
-        for(int i=0;i<n;i++){
-            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
+        Map<Character,Integer> fmap = new HashMap<>();
+        for(char c:s.toCharArray()){
+            fmap.put(c,fmap.getOrDefault(c,0)+1);
+        }
+        Map<Integer,ArrayList<Character>> map = new TreeMap<>(Collections.reverseOrder());
+        for(char c:fmap.keySet()){
+            int val = fmap.get(c);
+            if(map.containsKey(val)){
+                map.get(val).add(c);
+            }
+            else{
+                map.put(val,new ArrayList<>());
+                map.get(val).add(c);
+            }
         }
         StringBuilder sb = new StringBuilder();
-        PriorityQueue<Character> maxheap = new PriorityQueue<>((a,b)->{
-            int freqCompare = map.get(b) - map.get(a); 
-                if (freqCompare == 0) {
-                    return a - b; 
+        for(int i:map.keySet()){
+            ArrayList<Character> list = new ArrayList<>(map.get(i));
+            for(char let:list){
+                for(int k=0;k<i;k++){
+                    sb.append(let);
                 }
-                return freqCompare;
-        });
-        for(int i=0;i<n;i++){
-            maxheap.add(s.charAt(i));
-        }
-        while(!maxheap.isEmpty()){
-            sb.append(maxheap.poll());
+            }
         }
         return sb.toString();
-        
+
     }
 }
