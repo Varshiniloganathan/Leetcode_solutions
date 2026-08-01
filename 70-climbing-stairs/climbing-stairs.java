@@ -1,18 +1,19 @@
 class Solution {
-    public int func(int i,int[] dp){
-        if(i == 0) return 1;
-        if(i<0) return 0;
-        if(dp[i]!=-1){
-            return dp[i];
+    public int recur(int n, int[] dp){
+        if(dp[n]!=-1){
+            return dp[n];
         }
-        int one = func(i-1,dp);
-        int two = func(i-2,dp);
-        return dp[i] = one+two;
+        if(n==0 || n==1){
+            return 1;
+        }
+        dp[n] = recur(n-2,dp)+recur(n-1,dp);
+        return dp[n];
     }
     public int climbStairs(int n) {
         int[] dp = new int[n+1];
         Arrays.fill(dp,-1);
-        return func(n,dp);
+        return recur(n,dp);
+
         
     }
 }
