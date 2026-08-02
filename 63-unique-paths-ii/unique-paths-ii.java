@@ -1,25 +1,29 @@
 class Solution {
-    public int func(int i,int j,int[][] grid,int[][] dp){
-        if(i<0 || j<0) return 0;
-        if(grid[i][j]==1){
+    public int recur(int[][] grid,int m,int n,int[][] dp){
+        if(m<0 || n<0) return 0;
+         if(m==0 && n==0 && grid[m][n]!=1){
+            return 1;
+        }
+         if(grid[m][n] == 1){
             return 0;
         }
-        if(i==0 && j==0) return 1;
-        if(dp[i][j]!=-1) return dp[i][j];
-        int up = func(i-1,j,grid,dp);
-        int left = func(i,j-1,grid,dp);
-        return dp[i][j] = up+left;
+        if(dp[m][n]!=-1) return dp[m][n];
+       
+        return dp[m][n] = recur(grid,m-1,n,dp)+recur(grid,m,n-1,dp);
+
     }
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int c = obstacleGrid[0].length;
-        int r = obstacleGrid.length;
-        int[][] dp = new int[r][c];
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int[][] dp = new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
                 dp[i][j] = -1;
             }
         }
-        return func(r-1,c-1,obstacleGrid,dp);
+        return recur(obstacleGrid,m-1,n-1,dp);
+       
+
         
     }
 }
