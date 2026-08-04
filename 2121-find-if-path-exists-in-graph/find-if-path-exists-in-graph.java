@@ -1,22 +1,35 @@
 class Solution {
     public boolean dfs(Map<Integer, List<Integer>> graph, int source, int destination, Set<Integer> visited) {
-        Stack<Integer> st = new Stack<>();
-        st.push(source);
-        while (!st.isEmpty()) {
-            int curr = st.pop();
+        // Stack<Integer> st = new Stack<>();
+        // st.push(source);
+        // while (!st.isEmpty()) {
+        //     int curr = st.pop();
 
             
-            if (curr == destination)
-                return true;
-            if (!visited.contains(curr)) {
-                visited.add(curr);
-                for (int neighbor : graph.get(curr)) {
-                    st.push(neighbor);
+        //     if (curr == destination)
+        //         return true;
+        //     if (!visited.contains(curr)) {
+        //         visited.add(curr);
+        //         for (int neighbor : graph.get(curr)) {
+        //             st.push(neighbor);
+        //         }
+
+        //     }
+
+        // }
+        // return false;
+
+        if(source == destination) return true;
+        visited.add(source);
+            for(int neighbor : graph.get(source)){
+                if(!visited.contains(neighbor)){
+                    
+                   if( dfs(graph,neighbor,destination,visited)) return true;
+
                 }
-
+                
             }
-
-        }
+        
         return false;
     }
 
