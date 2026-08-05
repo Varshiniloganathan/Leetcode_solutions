@@ -1,11 +1,10 @@
 class Solution {
-    public boolean dfs(Map<Integer, List<Integer>> graph, int source, int destination, Set<Integer> visited) {
+    public boolean bfs(Map<Integer, List<Integer>> graph, int source, int destination, Set<Integer> visited) {
         // Stack<Integer> st = new Stack<>();
         // st.push(source);
         // while (!st.isEmpty()) {
         //     int curr = st.pop();
 
-            
         //     if (curr == destination)
         //         return true;
         //     if (!visited.contains(curr)) {
@@ -18,19 +17,36 @@ class Solution {
 
         // }
         // return false;
+        Queue<Integer> q = new LinkedList<>();
+        q.add(source);
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            if (curr == destination)
+                return true;
+            if (!visited.contains(curr)) {
+                visited.add(curr);
+                for (int neighbor : graph.get(curr)) {
 
-        if(source == destination) return true;
-        visited.add(source);
-            for(int neighbor : graph.get(source)){
-                if(!visited.contains(neighbor)){
-                    
-                   if( dfs(graph,neighbor,destination,visited)) return true;
-
+                    q.add(neighbor);
                 }
-                
+
             }
-        
+
+        }
         return false;
+
+        // if(source == destination) return true;
+
+        //     for(int neighbor : graph.get(source)){
+        //         if(!visited.contains(neighbor)){
+
+        //            if( dfs(graph,neighbor,destination,visited)) return true;
+
+        //         }
+
+        //     }
+
+        // return false;
     }
 
     public boolean validPath(int n, int[][] edges, int source, int destination) {
@@ -45,7 +61,7 @@ class Solution {
             graph.get(v).add(u);
 
         }
-        return dfs(graph, source, destination, visited);
+        return bfs(graph, source, destination, visited);
 
     }
 }
