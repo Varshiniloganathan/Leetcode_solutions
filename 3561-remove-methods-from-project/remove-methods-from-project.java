@@ -10,28 +10,27 @@ class Solution {
         return graph;
     }
 
-    public Set<Integer> suspecious(int k, int[][] invocations, Map<Integer, List<Integer>> graph,
-            Set<Integer> visited) {
+    public Set<Integer> suspecious(int k, int[][] invocations, Map<Integer, List<Integer>> graph) {
         Queue<Integer> q = new LinkedList<>();
+        Set<Integer> sus = new HashSet<>();
         q.add(k);
         while (!q.isEmpty()) {
             int curr = q.poll();
-            if (!visited.contains(curr)) {
-                visited.add(curr);
+            if (!sus.contains(curr)) {
+                sus.add(curr);
                 for (int neighbor : graph.getOrDefault(curr, Collections.emptyList())) {
                     q.add(neighbor);
                 }
             }
         }
-        return visited;
+        return sus;
 
     }
 
 
     public List<Integer> remainingMethods(int n, int k, int[][] invocations) {
         Map<Integer, List<Integer>> graph = createGraph(invocations);
-        Set<Integer> sus = new HashSet<>();
-        sus = suspecious(k, invocations, graph, sus);
+        Set<Integer> sus = suspecious(k, invocations, graph);
         List<Integer> ans = new ArrayList<>();
         for (int[] edge : invocations) {
             int u = edge[0];
