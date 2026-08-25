@@ -7,15 +7,14 @@ class Solution {
         int i = 0;
         for(int j = 0; j<nums.length; j++){
             sum+=nums[j];
-            len = j-i+1;
+            // len = j-i+1;
             // if(sum >= target){
             //     // len = j-i+1;
             //     minLen = Math.min(minLen, len);
             // }
             while(sum >= target  ) {
-                minLen = Math.min(minLen, len);
+                if(j-i+1 < minLen) minLen = j-i+1;
                 sum -= nums[i];
-                len--;
                 i++;
             }
             
