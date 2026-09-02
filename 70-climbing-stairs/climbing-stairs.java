@@ -1,20 +1,17 @@
 class Solution {
-
-    public int recur(int n, Map<Integer, Integer> hmap) {
-        if (hmap.containsKey(n))
-            return hmap.get(n);
-        if (n == 1 || n == 2)
-            return n;
-        int res = recur(n - 1,hmap) + recur(n - 2,hmap);
-        hmap.put(n, res);
-        return hmap.get(n);
+    public int recur(int n,Map<Integer,Integer> map){
+        if(n<0) return 0;
+        if(n==0) return 1;
+        if(map.containsKey(n)) return map.get(n);
+        int ans = recur(n-1, map)+recur(n-2, map);
+        map.put(n,ans);
+        return ans;
 
     }
-
     public int climbStairs(int n) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        return recur(n, map);
 
-        return recur(n,map);
-
+        
     }
 }
