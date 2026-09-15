@@ -1,5 +1,4 @@
 class Foo {
-    Semaphore semaphore1 = new Semaphore(1);
     Semaphore sema2 = new Semaphore(0);
     Semaphore sema3 = new Semaphore(0);
 
@@ -10,7 +9,6 @@ class Foo {
     public void first(Runnable printFirst) throws InterruptedException {
 
         // printFirst.run() outputs "first". Do not change or remove this line.
-        semaphore1.acquire();
         printFirst.run();
         sema2.release();
     }
