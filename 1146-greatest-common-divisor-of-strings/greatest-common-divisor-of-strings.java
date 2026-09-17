@@ -1,14 +1,10 @@
 class Solution {
-    public int gcd(int len1,int len2){
-        while(len2!=0){
-            int temp = len1%len2;
-            len1  = len2;
-            len2 = temp;
-        }
-        return len1;
+    public int gcd(int a, int b){
+        if(b==0) return a;
+        return gcd(b, a%b);
     }
     public String gcdOfStrings(String str1, String str2) {
-        if(!(str1+str2).equals(str2+str1)){
+        if(!((str1+str2).equals(str2+str1))){
             return "";
         }
         int lengcd = gcd(str1.length(),str2.length());
