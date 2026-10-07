@@ -9,35 +9,20 @@ class Solution {
         Arrays.sort(intervals, new A());
 
         ArrayList<int[]> list = new ArrayList<>();
-        int i = 0;
-        while(i < intervals.length){
-            int start = intervals[i][0];
-            
-            int j = i;
-
-            int end = intervals[j][1];
-
-            // while(j<intervals.length-1 && intervals[j][0] <= intervals[j+1][0] && intervals[j][1]>= intervals[j+1][0]){
-            //     end = Math.max(end,intervals[j+1][1]);
-            //     j++;
-            // }
-            while(j<intervals.length-1 && start <= intervals[j+1][0] && intervals[j+1][0] <= end){
-                end = Math.max(end,intervals[j+1][1]);
-                j++;
+        int[] start = intervals[0];
+        for(int i=1;i<intervals.length;i++){
+            int[] end = intervals[i];
+            if(start[1] >= end[0]){
+                start[1] = Math.max(start[1],end[1]);
+            }
+            else{
+                list.add(start);
+                start = end;
             }
 
-            list.add(new int[]{start,end});
-            i = j+1;
-
         }
-        int[][] ans = new int[list.size()][2];
-        i = 0;
-        for(int[] l : list){
-            ans[i][0] = l[0];
-            ans[i][1] = l[1];
-            i++;
-        }
-        return ans;
+        list.add(start);
+        return list.toArray(new int[list.size()][]);
 
     }
 
